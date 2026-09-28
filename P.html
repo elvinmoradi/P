@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SHOP FASAD KOSH | فروش سکه</title>
+<meta name="theme-color" content="#05080A">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/lalezar/index.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --bg:#05080A; --bg2:#080E12; --panel:#0C161A; --panel2:#112026;
+  --line:rgba(94,200,242,.18);
+  --volt:#5EC8F2; --volt-d:#2A8FC9; --lime:#BEE9FF;
+  --gold:#FFC83D; --gold-d:#D98A0B;
+  --text:#EAF3F4; --muted:#8FA3A8; --danger:#FF5A5F; --warn:#FFB020; --ok:#6fbf8b;
+  --font-body:'Vazirmatn',Tahoma,system-ui,sans-serif;
+  --font-display:'Lalezar','Vazirmatn',Tahoma,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--text);font-family:var(--font-body);line-height:1.85;min-height:100vh;overflow-x:hidden;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(60rem 38rem at 90% -8%,rgba(94,200,242,.16),transparent 60%),
+             radial-gradient(46rem 36rem at -12% 42%,rgba(94,200,242,.07),transparent 60%),var(--bg)}
+a{color:inherit} h1,h2,h3,p{margin:0}
+.wrap{width:min(1080px,100% - 32px);margin-inline:auto}
+.muted{color:var(--muted)}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(5,8,10,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--font-display);font-size:24px;line-height:1;direction:ltr}
+.logo .crown{width:24px;height:18px}
+.a{color:var(--volt);text-shadow:0 0 20px rgba(94,200,242,.5)}
+.b{background:linear-gradient(180deg,#fff,#9DB4B8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.burger{display:grid;gap:5px;width:44px;height:44px;place-content:center;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;cursor:pointer}
+.burger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav{position:absolute;inset:100% 0 auto 0;display:none;flex-direction:column;gap:2px;padding:10px 16px 16px;background:rgba(6,11,13,.97);border-bottom:1px solid var(--line)}
+.nav.open{display:flex}
+.nav a{padding:12px 14px;border-radius:14px;text-decoration:none;font-weight:600;color:var(--muted)}
+.nav a:hover{color:var(--text);background:rgba(94,200,242,.08)}
+@media(min-width:860px){
+  .burger{display:none}
+  .nav{position:static;display:flex;flex-direction:row;padding:0;background:none;border:0;gap:4px}
+  .nav a{padding:8px 14px;font-size:14px}
+}
+
+/* buttons / inputs */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 24px;border-radius:999px;border:0;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s,filter .2s}
+.btn-primary{background:linear-gradient(180deg,#8FDBFB,#2A8FC9);color:#04141A;box-shadow:0 10px 30px -10px rgba(94,200,242,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-primary:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.btn-ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,.09)}
+.btn-lg{min-height:54px;padding:0 34px;font-size:17px}
+.btn[disabled]{cursor:not-allowed;opacity:.5;transform:none;box-shadow:none;filter:none}
+.spin{display:none;width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(4,20,26,.3);border-top-color:#04141A;animation:rot .7s linear infinite}
+.loading .spin{display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.inp{width:100%;min-height:50px;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.13);background:#070F12;color:var(--text);font:inherit;font-size:16px}
+.inp::placeholder{color:#5f7378}
+.inp:focus{border-color:var(--volt);outline:0;box-shadow:0 0 0 3px rgba(94,200,242,.18)}
+textarea.inp{min-height:90px;resize:vertical}
+.err{color:#FF8A8E;font-size:13px;min-height:20px;margin-top:6px}
+.hint{color:var(--muted);font-size:13px;margin-top:6px}
+
+/* hero */
+.hero{padding:34px 0 18px}
+.hero-grid{display:grid;gap:26px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{padding:5px 14px;border-radius:999px;font-size:13px;font-weight:700;background:rgba(94,200,242,.09);border:1px solid var(--line);color:#CDEFFB}
+.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,11vw,84px);line-height:1.05;letter-spacing:-.5px}
+.hero h1 .a{text-shadow:0 0 40px rgba(94,200,242,.5),0 4px 0 #0B4E66}
+.lead{font-size:clamp(16px,3vw,19px);color:#C4DDE1;margin:14px 0 24px;max-width:34ch}
+.hero-txt>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero-txt>:nth-child(2){animation-delay:.08s}.hero-txt>:nth-child(3){animation-delay:.16s}.hero-txt>:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.hero-art{position:relative;perspective:900px}
+.scene{position:relative;width:100%;max-width:340px;aspect-ratio:1;margin-inline:auto}
+.glow{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,rgba(94,200,242,.4),rgba(94,200,242,0) 66%)}
+.scene .c{position:absolute;display:block;height:auto;aspect-ratio:1}
+.c1{width:62%;top:19%;left:19%;filter:drop-shadow(0 22px 26px rgba(0,0,0,.55)) drop-shadow(0 0 30px rgba(255,200,61,.35));animation:sway 6s ease-in-out infinite alternate}
+.c2{width:21%;top:5%;right:3%;animation:bob 5s ease-in-out infinite}
+.c3{width:15%;bottom:9%;left:5%;animation:bob 6s ease-in-out -2s infinite}
+@keyframes sway{from{transform:rotateY(-24deg) translateY(-6px)}to{transform:rotateY(24deg) translateY(6px)}}
+@keyframes bob{50%{transform:translateY(-10px) rotate(12deg)}}
+@media(min-width:900px){.hero{padding:56px 0 26px}.hero-grid{grid-template-columns:1.1fr .9fr}}
+
+/* sections */
+.sec{padding:44px 0 8px}
+.sec-h{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:6px 16px;margin-bottom:22px}
+h2{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,6vw,40px);line-height:1.2}
+section[id]{scroll-margin-top:76px}
+
+.svc-grid{display:grid;gap:14px}
+@media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+.svc{position:relative;padding:22px;border-radius:24px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.svc.is-live{border-color:rgba(94,200,242,.5);box-shadow:0 0 0 1px rgba(94,200,242,.12),0 20px 50px -24px rgba(94,200,242,.55)}
+.svc .ico{font-size:32px;line-height:1}
+.svc h3{font-family:var(--font-display);font-weight:400;font-size:26px}
+.svc p{color:var(--muted);font-size:15px}
+.svc .btn{margin-top:auto;align-self:flex-start}
+.sub-h{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--lime);margin-bottom:14px}
+.svc[data-tab]{cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.svc[data-tab]:not(.is-live):hover{border-color:rgba(94,200,242,.4)}
+.pill{display:inline-block;padding:2px 12px;border-radius:999px;font-size:12.5px;font-weight:800}
+.pill.in{background:rgba(94,200,242,.14);color:#9FE0FF;border:1px solid rgba(94,200,242,.35)}
+
+.packs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.packs{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:1040px){.packs{grid-template-columns:repeat(4,1fr)}}
+.pack{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 12px 16px;border-radius:24px;background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:transform .2s,border-color .2s,box-shadow .2s}
+.pack:hover{transform:translateY(-3px);border-color:rgba(94,200,242,.5);box-shadow:0 18px 40px -22px rgba(94,200,242,.6)}
+.pack .coin-ico{width:52px;height:52px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+.pack-name{font-family:var(--font-display);font-weight:400;font-size:38px;line-height:1.1;color:var(--gold);margin-top:4px}
+.pack-amt{color:var(--muted);font-size:13px}
+.pack-price{margin:6px 0 8px;font-size:14px;color:var(--muted)}
+.pack-price b{color:var(--text);font-size:19px;font-weight:800}
+.pack .btn{width:100%;margin-top:10px}
+.empty-note,.state{grid-column:1/-1;text-align:center;padding:36px 16px;border:1px dashed var(--line);border-radius:24px;color:var(--muted)}
+
+/* ads */
+.ads-wrap{display:flex;flex-direction:column;gap:12px}
+.ad-card{background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;gap:14px;align-items:center}
+.ad-card img{width:58px;height:58px;object-fit:cover;border-radius:10px;flex-shrink:0;border:1px solid var(--line)}
+.ad-card .ad-text{flex:1;font-size:14px;color:var(--text)}
+.ad-card .ad-timer{font-size:12px;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* footer */
+.ftr{margin-top:60px;padding:30px 0 40px;border-top:1px solid var(--line);text-align:center}
+.ftr strong{font-family:var(--font-display);font-weight:400;font-size:26px;display:block;color:var(--lime)}
+.contact-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.contact-links a{padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--volt);text-decoration:none}
+
+/* dialog */
+dialog{border:0;padding:0;background:transparent;color:inherit;width:calc(100% - 24px);max-width:440px;margin:auto;max-height:none;overflow:visible}
+dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.dlg{position:relative;max-height:calc(100dvh - 24px);overflow:auto;padding:26px 20px 20px;border-radius:28px;background:linear-gradient(170deg,#0F2530,#070F12);border:1px solid rgba(94,200,242,.32);box-shadow:0 30px 80px -20px #000,0 0 60px -22px rgba(94,200,242,.5)}
+.dlg h3{font-family:var(--font-display);font-weight:400;font-size:26px;margin-bottom:12px;padding-inline-end:36px}
+.x{position:absolute;top:14px;inset-inline-end:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:16px}
+.sum{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:rgba(0,0,0,.3);border:1px solid var(--line);margin-bottom:16px}
+.sum b{font-family:var(--font-display);font-weight:400;font-size:26px;color:var(--gold);line-height:1.1;display:block}
+.sum small{color:var(--muted);display:block}
+.note{margin:14px 0;padding:10px 14px;border-radius:14px;background:rgba(255,200,61,.08);border:1px solid rgba(255,200,61,.25);color:#F4E3B0;font-size:14px}
+.ok-box{text-align:center;padding:6px 0 4px}
+.ok-ico{width:60px;height:60px;border-radius:50%;display:inline-grid;place-items:center;font-size:28px;font-weight:900;background:linear-gradient(180deg,#8FDBFB,#2A8FC9);color:#04141A;box-shadow:0 0 40px rgba(94,200,242,.5);margin-bottom:10px}
+.file-drop{border:1.5px dashed rgba(94,200,242,.4);border-radius:14px;padding:18px 12px;text-align:center;color:var(--muted);font-size:13.5px;cursor:pointer;background:rgba(255,255,255,.02)}
+.file-drop:hover{border-color:var(--volt)}
+.file-drop.has-file{border-color:var(--ok);color:var(--text)}
+.file-drop input{display:none}
+.preview-thumb{margin-top:10px;max-height:140px;border-radius:12px;border:1px solid var(--line)}
+.dlg .btn{width:100%}
+.dlg .btn+.btn{margin-top:8px}
+
+/* toasts */
+#toasts{position:fixed;inset:auto 0 16px 0;width:auto;height:auto;margin:0;padding:0 12px;border:0;background:transparent;overflow:visible;color:inherit;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;z-index:300}
+.toast{pointer-events:auto;display:flex;align-items:center;gap:10px;width:100%;max-width:440px;padding:12px 14px;border-radius:16px;background:#0D1A1F;border:1px solid var(--line);border-inline-start:4px solid var(--volt);box-shadow:0 14px 40px -12px #000;font-size:14.5px;animation:pop .25s ease-out}
+.toast.error{border-inline-start-color:var(--danger)}
+.toast.out{opacity:0;transform:translateY(8px);transition:.25s}
+.ti{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-weight:900;font-size:13px;background:var(--volt);color:#04141A}
+.toast.error .ti{background:var(--danger);color:#fff}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="gold" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".45" stop-color="#FFC83D"/><stop offset="1" stop-color="#D98A0B"/></radialGradient>
+    <symbol id="coin" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="url(#gold)"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#FFE58A" stroke-opacity=".7" stroke-width="1.5"/>
+      <circle cx="32" cy="32" r="23.5" fill="none" stroke="#9A5A00" stroke-opacity=".55" stroke-width="2"/>
+      <polygon transform="translate(15 15.5) scale(1.42)" points="12,2.5 14.9,8.7 21.6,9.5 16.6,14.1 18,20.8 12,17.4 6,20.8 7.4,14.1 2.4,9.5 9.1,8.7" fill="#FFF6C2" stroke="#9A5A00" stroke-opacity=".6" stroke-width=".8"/>
+    </symbol>
+    <symbol id="crown" viewBox="0 0 32 24"><path d="M3 21 L1 6 L9 12 L16 2 L23 12 L31 6 L29 21 Z" fill="#BEE9FF" stroke="#0A2E3D" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#home" aria-label="صفحه اصلی">
+      <svg class="crown" aria-hidden="true"><use href="#crown"/></svg>
+      <span id="logoText"><span class="a">FASAD</span> <span class="b">KOSH</span></span>
+    </a>
+    <button id="burger" class="burger" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    <nav id="nav" class="nav" aria-label="منوی اصلی">
+      <a href="#home">خانه</a>
+      <a href="#shop">فروش سکه</a>
+      <a href="#adsSection">تبلیغات</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-txt">
+        <div class="chips">
+          <span class="chip">🛡️ خرید مطمئن</span>
+          <span class="chip">⚡ واریز سریع</span>
+          <span class="chip">پشتیبانی مستقیم</span>
+        </div>
+        <h1 id="heroTitle"><span class="a">FASAD</span> <span class="b">KOSH</span></h1>
+        <p id="heroSub" class="lead">فروشگاه سکه بازی Animal Rush — سریع، مطمئن، بدون واسطه</p>
+        <div><a class="btn btn-primary btn-lg" href="#shop">مشاهده فروشگاه</a></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="scene">
+          <div class="glow"></div>
+          <svg class="c c1" viewBox="0 0 64 64"><use href="#coin"/></svg>
+          <svg class="c c2" viewBox="0 0 64 64"><use href="#coin"/></svg>
+          <svg class="c c3" viewBox="0 0 64 64"><use href="#coin"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="sec">
+    <div class="wrap">
+      <div class="sec-h"><h2>خدمات</h2></div>
+      <div class="svc-grid">
+        <article class="svc is-live" data-tab="shop" role="button" tabindex="0" aria-controls="shop">
+          <div class="ico">🪙</div>
+          <h3>فروش سکه</h3>
+          <p>خرید سکه با بسته‌های مختلف</p>
+          <span class="btn btn-primary">مشاهده بخش سکه</span>
+        </article>
+        <article class="svc" data-tab="adsSection" role="button" tabindex="0" aria-controls="adsSection">
+          <div class="ico">📢</div>
+          <h3>تبلیغات</h3>
+          <p>تبلیغات فعال با زمان‌بندی مشخص</p>
+          <span class="btn btn-ghost">مشاهده بخش تبلیغات</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop" class="sec tabpanel">
+    <div class="wrap">
+      <div class="sec-h"><h2>بخش سکه</h2></div>
+      <h3 class="sub-h">لیست قیمت سکه‌ها</h3>
+      <div id="priceGrid" class="packs" aria-live="polite"><div class="empty-note">در حال بارگذاری...</div></div>
+      <h3 class="sub-h" style="margin-top:34px">پکیج‌های ویژه</h3>
+      <div id="pkgGrid" class="packs" aria-live="polite"><div class="empty-note">در حال بارگذاری...</div></div>
+    </div>
+  </section>
+
+  <section id="adsSection" class="sec tabpanel" hidden>
+    <div class="wrap">
+      <div class="sec-h"><h2>بخش تبلیغات</h2></div>
+      <div class="ads-wrap" id="adsWrap"><div class="empty-note">در حال بارگذاری...</div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <strong id="footerText">SHOP FASAD KOSH © تمامی حقوق محفوظ است</strong>
+    <div class="contact-links" id="contactLinks"></div>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg" id="dlgBody"></div></dialog>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ============ Supabase ============ */
+const SUPABASE_URL = "https://sxqmdksezenyhzupkluc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_uNlz4YOrCOom7OgZaAqjEg_CJyKiQEi";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = (s,r=document)=>r.querySelector(s);
+function toFa(n){ return Number(n).toLocaleString('fa-IR'); }
+function esc(s){ const d = document.createElement('div'); d.textContent = s||""; return d.innerHTML; }
+
+/* ============ toast ============ */
+const tbox = $('#toasts');
+function toast(msg, type, ms){
+  type = type || 'info';
+  const el = document.createElement('div'); el.className = 'toast '+type;
+  el.setAttribute('role', type==='error'?'alert':'status');
+  el.innerHTML = `<span class="ti">${type==='success'?'✓':type==='error'?'!':'i'}</span><span>${esc(msg)}</span>`;
+  tbox.appendChild(el);
+  setTimeout(()=>{ el.classList.add('out'); setTimeout(()=>el.remove(),260); }, ms||3800);
+}
+
+/* ============ burger nav ============ */
+const burger = $('#burger'), nav = $('#nav');
+burger.addEventListener('click', ()=>{
+  const open = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
+nav.addEventListener('click', e=>{ if(e.target.closest('a')){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); } });
+
+let PRICES = [], PACKAGES = [];
+
+/* ============ Settings ============ */
+async function loadSettings(){
+  const { data, error } = await sb.from('settings').select('*').eq('id',1).maybeSingle();
+  if(error || !data) return;
+  document.getElementById('heroSub').textContent = data.tagline || "";
+  document.getElementById('footerText').textContent = data.footer_text || "";
+  document.title = (data.site_title||"SHOP FASAD KOSH").replace(/[🌙💫]/g,'').trim() + " | فروش سکه";
+
+  const cl = document.getElementById('contactLinks');
+  cl.innerHTML = "";
+  (data.contact_links||[]).forEach(l=>{
+    const a = document.createElement('a');
+    a.href = l.url; a.textContent = l.label; a.target="_blank"; a.rel="noopener";
+    cl.appendChild(a);
+  });
+}
+
+/* ============ Prices & Packages (rendered as pack cards) ============ */
+function packCard(nameBig, amtLabel, toman, buyKey){
+  const el = document.createElement('div');
+  el.className = "pack";
+  el.innerHTML = `
+    <svg class="coin-ico" viewBox="0 0 64 64"><use href="#coin"/></svg>
+    <div class="pack-name">${toFa(nameBig)}</div>
+    <div class="pack-amt">${amtLabel}</div>
+    <div class="pack-price">قیمت: <b>${toFa(toman)} تومان</b></div>
+    <button type="button" class="btn btn-primary" data-buy="${buyKey}">خرید</button>`;
+  return el;
+}
+async function loadPrices(){
+  const { data, error } = await sb.from('prices').select('*').order('coin', {ascending:true});
+  const grid = document.getElementById('priceGrid');
+  if(error){ grid.innerHTML = '<div class="empty-note">خطا در بارگذاری قیمت‌ها</div>'; return; }
+  PRICES = data || [];
+  grid.innerHTML = "";
+  if(PRICES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً قیمتی ثبت نشده</div>'; return; }
+  PRICES.forEach(p=> grid.appendChild(packCard(p.coin, "سکه", p.toman, "price:"+p.id)));
+}
+async function loadPackages(){
+  const { data, error } = await sb.from('packages').select('*').order('coin', {ascending:true});
+  const grid = document.getElementById('pkgGrid');
+  if(error){ grid.innerHTML = '<div class="empty-note">خطا در بارگذاری پکیج‌ها</div>'; return; }
+  PACKAGES = data || [];
+  grid.innerHTML = "";
+  if(PACKAGES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً پکیجی ثبت نشده</div>'; return; }
+  PACKAGES.forEach(k=> grid.appendChild(packCard(k.coin, k.label, k.toman, "pkg:"+k.id)));
+}
+
+/* ============ Ads ============ */
+async function loadAds(){
+  const { data, error } = await sb.from('ads').select('*').eq('active', true).order('started_at', {ascending:false});
+  const wrap = document.getElementById('adsWrap');
+  if(error){ wrap.innerHTML = '<div class="empty-note">خطا در بارگذاری تبلیغات</div>'; return; }
+  const now = Date.now();
+  const active = (data||[]).filter(a=> now < new Date(a.started_at).getTime() + a.duration_hours*3600*1000 );
+  wrap.innerHTML = "";
+  if(active.length===0){ wrap.innerHTML = '<div class="empty-note">در حال حاضر تبلیغی فعال نیست</div>'; return; }
+  active.forEach(a=>{
+    const end = new Date(a.started_at).getTime() + a.duration_hours*3600*1000;
+    const el = document.createElement('div');
+    el.className = "ad-card";
+    el.innerHTML = `
+      ${a.image_url ? `<img src="${a.image_url}" alt="">` : ''}
+      <div class="ad-text">${esc(a.text)}</div>
+      <div class="ad-timer" data-end="${end}">--:--:--</div>`;
+    wrap.appendChild(el);
+  });
+  tickAdTimers();
+}
+function tickAdTimers(){
+  document.querySelectorAll('.ad-timer').forEach(elm=>{
+    const end = Number(elm.dataset.end);
+    const diff = end - Date.now();
+    if(diff<=0){ elm.textContent = "پایان یافت"; return; }
+    const h = Math.floor(diff/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+    elm.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  });
+}
+setInterval(tickAdTimers, 1000);
+setInterval(loadAds, 60000);
+
+/* ============ Order dialog ============ */
+const dlg = $('#dlg'), dlgBody = $('#dlgBody');
+let dlgFile = null;
+
+function openOrder(buyKey){
+  dlgFile = null;
+  let item = null, label = "", amt = 0, toman = 0;
+  if(buyKey.startsWith("price:")){
+    item = PRICES.find(x=>String(x.id)===buyKey.split(":")[1]);
+    if(item){ label = "سکه"; amt = item.coin; toman = item.toman; }
+  } else {
+    item = PACKAGES.find(x=>String(x.id)===buyKey.split(":")[1]);
+    if(item){ label = item.label; amt = item.coin; toman = item.toman; }
+  }
+  if(!item) return;
+
+  dlgBody.innerHTML = `
+    <h3 id="dlgTitle">تکمیل سفارش</h3>
+    <button class="x" type="button" data-close aria-label="بستن">✕</button>
+    <div class="sum">
+      <svg width="48" height="48" viewBox="0 0 64 64"><use href="#coin"/></svg>
+      <div>
+        <b>${toFa(amt)} سکه</b>
+        <small>${esc(label)}</small>
+      </div>
+      <div style="margin-inline-start:auto;text-align:end;font-weight:800">${toFa(toman)} تومان</div>
+    </div>
+    <form id="orderForm" novalidate>
+      <div class="field"><label for="orderName">نام یا آیدی شما</label><input id="orderName" class="inp" placeholder="مثلاً @username" required></div>
+      <div class="field"><label for="orderContact">شماره تماس / آیدی برای پیگیری</label><input id="orderContact" class="inp" placeholder="شماره یا آیدی تلگرام" required></div>
+      <div class="field">
+        <label>رسید پرداخت</label>
+        <label class="file-drop" id="fileDrop">
+          <span id="fileDropText">برای انتخاب تصویر رسید کلیک کنید</span>
+          <input type="file" id="receiptFile" accept="image/*" required>
+        </label>
+        <img id="receiptPreview" class="preview-thumb" hidden>
+      </div>
+      <p class="err" id="orderErr" role="alert"></p>
+      <button class="btn btn-primary" id="submitBtn" type="submit"><span class="spin"></span><span class="lbl">ثبت سفارش</span></button>
+    </form>
+  `;
+  dlgBody.dataset.itemDesc = `${label} — ${toFa(amt)} سکه (${toFa(toman)} تومان)`;
+
+  const fileDrop = $('#fileDrop', dlgBody);
+  const fileInput = $('#receiptFile', dlgBody);
+  fileInput.addEventListener('change', ()=>{
+    const f = fileInput.files[0];
+    if(!f) return;
+    dlgFile = f;
+    const reader = new FileReader();
+    reader.onload = e=>{ $('#receiptPreview', dlgBody).src = e.target.result; $('#receiptPreview', dlgBody).hidden = false; };
+    reader.readAsDataURL(f);
+    fileDrop.classList.add('has-file');
+    $('#fileDropText', dlgBody).textContent = "✅ " + f.name;
+  });
+
+  $('#orderForm', dlgBody).addEventListener('submit', submitOrder);
+  if(typeof dlg.showModal === 'function') dlg.showModal();
+}
+
+async function submitOrder(e){
+  e.preventDefault();
+  const btn = $('#submitBtn', dlgBody), err = $('#orderErr', dlgBody);
+  err.textContent = "";
+  const name = $('#orderName', dlgBody).value.trim();
+  const contact = $('#orderContact', dlgBody).value.trim();
+  if(!dlgFile){ err.textContent = "لطفاً تصویر رسید را انتخاب کنید."; return; }
+
+  btn.disabled = true; btn.classList.add('loading');
+  try{
+    const ext = (dlgFile.name.split('.').pop()||'jpg').toLowerCase();
+    const path = `${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`;
+    const { error: upErr } = await sb.storage.from('receipts').upload(path, dlgFile);
+    if(upErr) throw upErr;
+    const { error: insErr } = await sb.from('orders').insert({
+      item_desc: dlgBody.dataset.itemDesc, name, contact, receipt_path: path, status: 'pending'
+    });
+    if(insErr) throw insErr;
+
+    dlgBody.innerHTML = `
+      <button class="x" type="button" data-close aria-label="بستن">✕</button>
+      <div class="ok-box">
+        <div class="ok-ico">✓</div>
+        <h3>سفارش ثبت شد</h3>
+        <p class="muted" style="margin-top:6px">سفارش شما پس از بررسی مدیریت تأیید می‌شود.</p>
+        <div class="note">${esc(dlgBody.dataset.itemDesc)}</div>
+        <button class="btn btn-ghost" type="button" data-close style="width:100%">بستن</button>
+      </div>`;
+    toast('سفارش شما ثبت شد.', 'success');
+  }catch(err2){
+    err.textContent = "خطا در ثبت سفارش. دوباره تلاش کنید.";
+    toast('خطا در ثبت سفارش.', 'error');
+    console.error(err2);
+  }finally{
+    if(btn.isConnected){ btn.disabled = false; btn.classList.remove('loading'); }
+  }
+}
+
+function closeDlg(){ if(dlg.open) dlg.close(); }
+document.addEventListener('click', e=>{
+  const buy = e.target.closest('[data-buy]'); if(buy){ openOrder(buy.dataset.buy); return; }
+  if(e.target.closest('[data-close]')) closeDlg();
+});
+dlg.addEventListener('click', e=>{ if(e.target===dlg) closeDlg(); });
+
+
+/* ============ Sections (tabs) ============ */
+function showTab(id){
+  document.querySelectorAll('.tabpanel').forEach(p=>{ p.hidden = p.id!==id; });
+  document.querySelectorAll('.svc[data-tab]').forEach(c=>{
+    const on = c.dataset.tab===id;
+    c.classList.toggle('is-live', on);
+    const b = c.querySelector('.btn'); if(b){ b.className = 'btn '+(on?'btn-primary':'btn-ghost'); }
+  });
+}
+document.querySelectorAll('.svc[data-tab]').forEach(c=>{
+  c.addEventListener('click', ()=>showTab(c.dataset.tab));
+  c.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showTab(c.dataset.tab); } });
+});
+document.querySelectorAll('a[href="#shop"],a[href="#adsSection"]').forEach(a=>{
+  a.addEventListener('click', ()=>showTab(a.getAttribute('href').slice(1)));
+});
+if(location.hash==='#adsSection') showTab('adsSection');
+
+/* ============ Init ============ */
+(async function init(){
+  await loadSettings();
+  await Promise.all([loadPrices(), loadPackages()]);
+  await loadAds();
+})();
+</script>
+</body>
+</html>
