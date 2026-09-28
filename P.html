@@ -134,11 +134,37 @@ section[id]{scroll-margin-top:76px}
 .ad-card .ad-text{flex:1;font-size:14px;color:var(--text)}
 .ad-card .ad-timer{font-size:12px;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
 
+
+.book{margin-top:22px;padding:22px;border-radius:24px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line)}
+.book h3{font-family:var(--font-display);font-weight:400;font-size:26px;margin-bottom:4px}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;margin:8px 0 4px}
+.day{padding:10px 6px;border-radius:14px;border:1px solid var(--line);background:#070F12;color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer;line-height:1.5}
+.day small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.day.sel{border-color:var(--volt);background:rgba(94,200,242,.14);box-shadow:0 0 0 2px rgba(94,200,242,.2)}
+.day.taken{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.book-msg{display:none;margin-top:12px;padding:12px 14px;border-radius:14px;font-size:14px;text-align:center}
+.book-msg.ok{display:block;border:1px solid rgba(111,191,139,.4);background:rgba(111,191,139,.08);color:var(--ok)}
+.book-msg.bad{display:block;border:1px solid rgba(255,90,95,.4);background:rgba(255,90,95,.08);color:var(--danger)}
+.payment-box{margin:16px 0;padding:16px;border-radius:18px;background:linear-gradient(160deg,rgba(94,200,242,.09),rgba(255,255,255,.025));border:1px solid rgba(94,200,242,.22);animation:softIn .45s ease-out both}
+.payment-box h4{margin:0 0 8px;font-family:var(--font-display);font-size:20px;font-weight:400;color:var(--lime)}
+.payment-info{white-space:pre-line;color:var(--text);font-size:14px;line-height:1.9}
+@keyframes softIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.book{animation:softIn .5s ease-out both}
+
+
+.payment-card-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);font-size:13px}.payment-card-row>span{color:var(--muted)}.payment-card-row b{color:var(--text);font-size:14px}.card-copy-wrap{display:flex;align-items:center;gap:8px;direction:ltr}.copy-card{border:1px solid rgba(94,200,242,.35);background:rgba(94,200,242,.10);color:var(--volt);border-radius:10px;padding:6px 10px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.copy-card:hover{background:rgba(94,200,242,.18);transform:translateY(-1px)}.channel-note{margin-top:10px;padding:9px 11px;border-radius:12px;background:rgba(255,200,61,.07);border:1px solid rgba(255,200,61,.18);color:#F4E3B0;font-size:12.5px}
+
 /* footer */
 .ftr{margin-top:60px;padding:30px 0 40px;border-top:1px solid var(--line);text-align:center}
 .ftr strong{font-family:var(--font-display);font-weight:400;font-size:26px;display:block;color:var(--lime)}
 .contact-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .contact-links a{padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--volt);text-decoration:none}
+
+/* coin purchase */
+.coin-pay-box{margin:0 0 18px;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(94,200,242,.11),rgba(255,200,61,.045));border:1px solid rgba(94,200,242,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.coin-pay-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}.coin-pay-head>span{font-size:25px}.coin-pay-head b{display:block;font-family:var(--font-display);font-size:20px;font-weight:400;color:var(--lime)}.coin-pay-head small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.coin-pay-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid rgba(255,255,255,.07);font-size:13px}.coin-pay-row>span{color:var(--muted)}.coin-pay-row>b{font-size:14px}.coin-card-copy{display:flex;align-items:center;gap:7px;direction:ltr}.coin-card-copy b{font-size:14px;letter-spacing:.4px}.copy-order-card{border:1px solid rgba(94,200,242,.35);background:rgba(94,200,242,.1);color:var(--volt);border-radius:10px;padding:6px 10px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:.18s}.copy-order-card:hover{background:rgba(94,200,242,.18);transform:translateY(-1px)}.coin-payment-note{margin-top:10px;padding:9px 11px;border-radius:12px;background:rgba(255,200,61,.07);border:1px solid rgba(255,200,61,.18);color:#F4E3B0;font-size:12.5px;white-space:pre-line}
+.purchase-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0 16px}.purchase-step{padding:9px 5px;text-align:center;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);font-size:11px;color:var(--muted)}.purchase-step b{display:block;color:var(--text);font-size:15px;margin-bottom:2px}
 
 /* dialog */
 dialog{border:0;padding:0;background:transparent;color:inherit;width:calc(100% - 24px);max-width:440px;margin:auto;max-height:none;overflow:visible}
@@ -238,7 +264,7 @@ dialog[open]{animation:pop .22s ease-out}
         <article class="svc" data-tab="adsSection" role="button" tabindex="0" aria-controls="adsSection">
           <div class="ico">📢</div>
           <h3>تبلیغات</h3>
-          <p>تبلیغات فعال با زمان‌بندی مشخص</p>
+          <p>رزرو تبلیغ برای انتشار در کانال</p>
           <span class="btn btn-ghost">مشاهده بخش تبلیغات</span>
         </article>
       </div>
@@ -257,8 +283,31 @@ dialog[open]{animation:pop .22s ease-out}
 
   <section id="adsSection" class="sec tabpanel" hidden>
     <div class="wrap">
-      <div class="sec-h"><h2>بخش تبلیغات</h2></div>
-      <div class="ads-wrap" id="adsWrap"><div class="empty-note">در حال بارگذاری...</div></div>
+      <div class="sec-h"><h2>رزرو تبلیغ</h2></div>
+      <div class="book" id="bookBox">
+        <h3>رزرو تبلیغ</h3>
+        <p class="muted" id="bookInfo" style="font-size:14px">یک روز خالی انتخاب کنید، متن تبلیغ و رسید پرداخت را ارسال کنید.</p>
+        <div class="payment-box" id="paymentBox" hidden>
+          <h4>💳 اطلاعات پرداخت</h4>
+          <div class="payment-info" id="paymentInfo"></div>
+          <div class="payment-card-row"><span>شماره کارت</span><div class="card-copy-wrap"><b id="adCardNumber">در حال بارگذاری...</b><button type="button" class="copy-card" id="copyAdCard">کپی</button></div></div>
+          <div class="payment-card-row"><span>صاحب کارت</span><b id="adCardHolder">—</b></div>
+          <div class="channel-note">📢 محل انتشار: کانال روبیکا <b dir="ltr">@mujhan_F10</b></div>
+        </div>
+        <div class="field" style="margin-top:14px"><label>روز تبلیغ</label><div class="days" id="days"></div></div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="bkName">نام یا آیدی شما</label><input id="bkName" class="inp" placeholder="مثلاً @username"></div>
+          <div class="field"><label for="bkContact">شناسه تماس (روبیکا / تلگرام / شماره)</label><input id="bkContact" class="inp"></div>
+          <div class="field"><label for="bkText">متن تبلیغ</label><textarea id="bkText" class="inp" placeholder="متن تبلیغ شما..."></textarea></div>
+          <div class="field">
+            <label>رسید پرداخت</label>
+            <label class="file-drop" id="bkDrop"><span id="bkDropText">برای انتخاب تصویر رسید کلیک کنید</span><input type="file" id="bkFile" accept="image/*"></label>
+          </div>
+          <p class="err" id="bkErr" role="alert"></p>
+          <button class="btn btn-primary" id="bkBtn" type="submit" style="width:100%"><span class="spin"></span><span class="lbl">ثبت رزرو</span></button>
+          <div class="book-msg" id="bkMsg"></div>
+        </form>
+      </div>
     </div>
   </section>
 </main>
@@ -304,21 +353,47 @@ nav.addEventListener('click', e=>{ if(e.target.closest('a')){ nav.classList.remo
 
 let PRICES = [], PACKAGES = [];
 
+/* ============ Safe loading helpers ============ */
+const LOAD_TIMEOUT = 8000;
+function withTimeout(promise, label, ms=LOAD_TIMEOUT){
+  let timer;
+  const timeout = new Promise((_, reject)=>{
+    timer = setTimeout(()=>reject(new Error(label+' timeout')), ms);
+  });
+  return Promise.race([promise, timeout]).finally(()=>clearTimeout(timer));
+}
+function setLoadState(id, text, retry){
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.innerHTML = `<div class="empty-note">${esc(text)}${retry?'<br><button type="button" class="btn btn-ghost" data-retry="'+retry+'" style="margin-top:12px">تلاش مجدد</button>':''}</div>`;
+}
+
 /* ============ Settings ============ */
 async function loadSettings(){
-  const { data, error } = await sb.from('settings').select('*').eq('id',1).maybeSingle();
-  if(error || !data) return;
-  document.getElementById('heroSub').textContent = data.tagline || "";
-  document.getElementById('footerText').textContent = data.footer_text || "";
-  document.title = (data.site_title||"SHOP FASAD KOSH").replace(/[🌙💫]/g,'').trim() + " | فروش سکه";
+  try{
+    const { data, error } = await withTimeout(
+      sb.from('settings').select('*').eq('id',1).maybeSingle(),
+      'settings'
+    );
+    if(error) throw error;
+    if(!data) return true;
+    document.getElementById('heroSub').textContent = data.tagline || "";
+    document.getElementById('footerText').textContent = data.footer_text || "";
+    document.title = (data.site_title||"SHOP FASAD KOSH").replace(/[🌙💫]/g,'').trim() + " | فروش سکه";
 
-  const cl = document.getElementById('contactLinks');
-  cl.innerHTML = "";
-  (data.contact_links||[]).forEach(l=>{
-    const a = document.createElement('a');
-    a.href = l.url; a.textContent = l.label; a.target="_blank"; a.rel="noopener";
-    cl.appendChild(a);
-  });
+    const cl = document.getElementById('contactLinks');
+    cl.innerHTML = "";
+    (data.contact_links||[]).forEach(l=>{
+      const a = document.createElement('a');
+      a.href = l.url; a.textContent = l.label; a.target="_blank"; a.rel="noopener";
+      cl.appendChild(a);
+    });
+    return true;
+  }catch(error){
+    console.error('loadSettings failed:', error);
+    toast('تنظیمات سایت بارگذاری نشد؛ فروشگاه همچنان قابل استفاده است.','error',5000);
+    return false;
+  }
 }
 
 /* ============ Prices & Packages (rendered as pack cards) ============ */
@@ -334,62 +409,54 @@ function packCard(nameBig, amtLabel, toman, buyKey){
   return el;
 }
 async function loadPrices(){
-  const { data, error } = await sb.from('prices').select('*').order('coin', {ascending:true});
   const grid = document.getElementById('priceGrid');
-  if(error){ grid.innerHTML = '<div class="empty-note">خطا در بارگذاری قیمت‌ها</div>'; return; }
-  PRICES = data || [];
-  grid.innerHTML = "";
-  if(PRICES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً قیمتی ثبت نشده</div>'; return; }
-  PRICES.forEach(p=> grid.appendChild(packCard(p.coin, "سکه", p.toman, "price:"+p.id)));
+  grid.innerHTML = '<div class="empty-note">در حال بارگذاری...</div>';
+  try{
+    const { data, error } = await withTimeout(
+      sb.from('prices').select('*').order('coin', {ascending:true}),
+      'prices'
+    );
+    if(error) throw error;
+    PRICES = data || [];
+    grid.innerHTML = "";
+    if(PRICES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً قیمتی ثبت نشده</div>'; return true; }
+    PRICES.forEach(p=> grid.appendChild(packCard(p.coin, "سکه", p.toman, "price:"+p.id)));
+    return true;
+  }catch(error){
+    console.error('loadPrices failed:', error);
+    setLoadState('priceGrid','بارگذاری قیمت‌ها انجام نشد. اتصال به سرور را بررسی کنید.','prices');
+    return false;
+  }
 }
 async function loadPackages(){
-  const { data, error } = await sb.from('packages').select('*').order('coin', {ascending:true});
   const grid = document.getElementById('pkgGrid');
-  if(error){ grid.innerHTML = '<div class="empty-note">خطا در بارگذاری پکیج‌ها</div>'; return; }
-  PACKAGES = data || [];
-  grid.innerHTML = "";
-  if(PACKAGES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً پکیجی ثبت نشده</div>'; return; }
-  PACKAGES.forEach(k=> grid.appendChild(packCard(k.coin, k.label, k.toman, "pkg:"+k.id)));
+  grid.innerHTML = '<div class="empty-note">در حال بارگذاری...</div>';
+  try{
+    const { data, error } = await withTimeout(
+      sb.from('packages').select('*').order('coin', {ascending:true}),
+      'packages'
+    );
+    if(error) throw error;
+    PACKAGES = data || [];
+    grid.innerHTML = "";
+    if(PACKAGES.length===0){ grid.innerHTML = '<div class="empty-note">فعلاً پکیجی ثبت نشده</div>'; return true; }
+    PACKAGES.forEach(k=> grid.appendChild(packCard(k.coin, k.label, k.toman, "pkg:"+k.id)));
+    return true;
+  }catch(error){
+    console.error('loadPackages failed:', error);
+    setLoadState('pkgGrid','بارگذاری پکیج‌ها انجام نشد. اتصال به سرور را بررسی کنید.','packages');
+    return false;
+  }
 }
 
-/* ============ Ads ============ */
-async function loadAds(){
-  const { data, error } = await sb.from('ads').select('*').eq('active', true).order('started_at', {ascending:false});
-  const wrap = document.getElementById('adsWrap');
-  if(error){ wrap.innerHTML = '<div class="empty-note">خطا در بارگذاری تبلیغات</div>'; return; }
-  const now = Date.now();
-  const active = (data||[]).filter(a=> now < new Date(a.started_at).getTime() + a.duration_hours*3600*1000 );
-  wrap.innerHTML = "";
-  if(active.length===0){ wrap.innerHTML = '<div class="empty-note">در حال حاضر تبلیغی فعال نیست</div>'; return; }
-  active.forEach(a=>{
-    const end = new Date(a.started_at).getTime() + a.duration_hours*3600*1000;
-    const el = document.createElement('div');
-    el.className = "ad-card";
-    el.innerHTML = `
-      ${a.image_url ? `<img src="${a.image_url}" alt="">` : ''}
-      <div class="ad-text">${esc(a.text)}</div>
-      <div class="ad-timer" data-end="${end}">--:--:--</div>`;
-    wrap.appendChild(el);
-  });
-  tickAdTimers();
-}
-function tickAdTimers(){
-  document.querySelectorAll('.ad-timer').forEach(elm=>{
-    const end = Number(elm.dataset.end);
-    const diff = end - Date.now();
-    if(diff<=0){ elm.textContent = "پایان یافت"; return; }
-    const h = Math.floor(diff/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
-    elm.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  });
-}
-setInterval(tickAdTimers, 1000);
-setInterval(loadAds, 60000);
+/* ============ Ads display disabled ============ */
+// تبلیغات در سایت نمایش داده نمی‌شوند؛ رزروهای تأییدشده برای انتشار در کانال آماده می‌شوند.
 
 /* ============ Order dialog ============ */
 const dlg = $('#dlg'), dlgBody = $('#dlgBody');
 let dlgFile = null;
 
-function openOrder(buyKey){
+async function openOrder(buyKey){
   dlgFile = null;
   let item = null, label = "", amt = 0, toman = 0;
   if(buyKey.startsWith("price:")){
@@ -411,6 +478,13 @@ function openOrder(buyKey){
         <small>${esc(label)}</small>
       </div>
       <div style="margin-inline-start:auto;text-align:end;font-weight:800">${toFa(toman)} تومان</div>
+    </div>
+    <div class="purchase-steps"><div class="purchase-step"><b>۱</b>پرداخت</div><div class="purchase-step"><b>۲</b>ارسال رسید</div><div class="purchase-step"><b>۳</b>بررسی و تحویل</div></div>
+    <div class="coin-pay-box">
+      <div class="coin-pay-head"><span>💳</span><div><b>اطلاعات پرداخت</b><small>ابتدا مبلغ سفارش را به کارت زیر واریز کنید، سپس رسید را ارسال کنید.</small></div></div>
+      <div class="coin-pay-row"><span>شماره کارت</span><div class="coin-card-copy"><b id="orderCardNumber">در حال بارگذاری...</b><button type="button" class="copy-order-card" id="copyOrderCard">کپی</button></div></div>
+      <div class="coin-pay-row"><span>صاحب کارت</span><b id="orderCardHolder">—</b></div>
+      <div id="orderPaymentNote" class="coin-payment-note" hidden></div>
     </div>
     <form id="orderForm" novalidate>
       <div class="field"><label for="orderName">نام یا آیدی شما</label><input id="orderName" class="inp" placeholder="مثلاً @username" required></div>
@@ -442,8 +516,35 @@ function openOrder(buyKey){
     $('#fileDropText', dlgBody).textContent = "✅ " + f.name;
   });
 
-  $('#orderForm', dlgBody).addEventListener('submit', submitOrder);
   if(typeof dlg.showModal === 'function') dlg.showModal();
+
+  const cardEl = $('#orderCardNumber', dlgBody);
+  const holderEl = $('#orderCardHolder', dlgBody);
+  const noteEl = $('#orderPaymentNote', dlgBody);
+  let card = '';
+  try{
+    const [{ data: pay, error: payErr }, { data: settingsPay, error: settingsPayErr }] = await withTimeout(Promise.all([
+      sb.from('payment_info').select('card_number,card_holder').eq('id',1).maybeSingle(),
+      sb.from('settings').select('payment_public_note').eq('id',1).maybeSingle()
+    ]), 'order payment info');
+    if(payErr) console.error('order payment info:', payErr);
+    if(settingsPayErr) console.error('order payment note:', settingsPayErr);
+    card = (pay && pay.card_number) ? String(pay.card_number) : '';
+    cardEl.textContent = card || 'شماره کارت تنظیم نشده';
+    holderEl.textContent = (pay && pay.card_holder) ? pay.card_holder : '—';
+    if(settingsPay && settingsPay.payment_public_note){ noteEl.textContent = settingsPay.payment_public_note; noteEl.hidden = false; }
+  }catch(error){
+    console.error('order payment loading failed:', error);
+    cardEl.textContent = 'اطلاعات پرداخت بارگذاری نشد';
+    holderEl.textContent = '—';
+  }
+  $('#copyOrderCard', dlgBody).addEventListener('click', async ()=>{
+    if(!card){ toast('شماره کارت تنظیم نشده است.','error'); return; }
+    try{ await navigator.clipboard.writeText(card); }catch{ const ta=document.createElement('textarea'); ta.value=card; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+    $('#copyOrderCard', dlgBody).textContent='✓ کپی شد';
+    setTimeout(()=>$('#copyOrderCard', dlgBody).textContent='کپی',1600);
+    toast('شماره کارت کپی شد.','success');
+  });
 }
 
 async function submitOrder(e){
@@ -510,11 +611,111 @@ document.querySelectorAll('a[href="#shop"],a[href="#adsSection"]').forEach(a=>{
 });
 if(location.hash==='#adsSection') showTab('adsSection');
 
+
+/* ============ Ad booking (day-based) ============ */
+let AD_PRICE = 0, AD_HOURS = 3, selDay = null, bkFile = null, takenDays = new Set();
+let AD_CARD_NUMBER = "", AD_CARD_HOLDER = "";
+function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+async function loadBooking(){
+  try{
+    const [{ data: st, error: stErr }, { data: pay, error: payErr }] = await withTimeout(Promise.all([
+      sb.from('settings').select('ad_price,ad_duration_hours,payment_public_note').eq('id',1).maybeSingle(),
+      sb.from('payment_info').select('card_number,card_holder').eq('id',1).maybeSingle()
+    ]), 'booking settings');
+    if(stErr) console.error('booking settings:', stErr);
+    if(payErr) console.error('payment info:', payErr);
+    if(st){ AD_PRICE = st.ad_price||0; AD_HOURS = st.ad_duration_hours||3; }
+    AD_CARD_NUMBER = pay?.card_number || '';
+    AD_CARD_HOLDER = pay?.card_holder || '';
+    $('#adCardNumber').textContent = AD_CARD_NUMBER || 'شماره کارت تنظیم نشده';
+    $('#adCardHolder').textContent = AD_CARD_HOLDER || '—';
+    const paymentBox = $('#paymentBox'), paymentInfo = $('#paymentInfo');
+    const paymentText = st && st.payment_public_note ? String(st.payment_public_note).trim() : '';
+    if(paymentText){ paymentInfo.textContent = paymentText; paymentBox.hidden = false; } else { paymentBox.hidden = true; }
+    $('#bookInfo').textContent = `یک روز خالی انتخاب کنید، متن تبلیغ و رسید پرداخت را ارسال کنید. مدت نمایش: ${toFa(AD_HOURS)} ساعت` + (AD_PRICE?` — هزینه: ${toFa(AD_PRICE)} تومان`:'');
+  }catch(error){
+    console.error('loadBooking settings failed:', error);
+  }
+
+  let taken = [];
+  try{
+    const result = await withTimeout(sb.rpc('taken_ad_days'), 'taken_ad_days');
+    if(result.error) throw result.error;
+    taken = result.data || [];
+  }catch(error){
+    console.error('taken_ad_days failed:', error);
+    // اگر RPC خراب باشد، روزها همچنان نمایش داده می‌شوند؛ فقط وضعیت پر بودن دقیق نیست.
+  }
+  takenDays = new Set(taken.map(x=>String(x).slice(0,10)));
+  const box = $('#days'); box.innerHTML = "";
+  for(let i=0;i<7;i++){
+    const d = new Date(); d.setDate(d.getDate()+i);
+    const key = ymd(d), isTaken = takenDays.has(key);
+    const b = document.createElement('button');
+    b.type='button'; b.className='day'+(isTaken?' taken':''); b.dataset.day=key; b.disabled=isTaken;
+    b.innerHTML = `${d.toLocaleDateString('fa-IR',{weekday:'long'})}<small>${d.toLocaleDateString('fa-IR',{month:'long',day:'numeric'})}${isTaken?' · پر':''}</small>`;
+    b.addEventListener('click', ()=>{ selDay=key; box.querySelectorAll('.day').forEach(x=>x.classList.toggle('sel',x===b)); });
+    box.appendChild(b);
+  }
+}
+$('#copyAdCard').addEventListener('click', async ()=>{
+  const card=AD_CARD_NUMBER.trim();
+  if(!card){ toast('شماره کارت تنظیم نشده است.','error'); return; }
+  try{ await navigator.clipboard.writeText(card); }catch{ const ta=document.createElement('textarea'); ta.value=card; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  $('#copyAdCard').textContent='✓ کپی شد';
+  setTimeout(()=>$('#copyAdCard').textContent='کپی',1600);
+  toast('شماره کارت کپی شد.','success');
+});
+$('#bkFile').addEventListener('change', function(){
+  bkFile = this.files[0]||null;
+  $('#bkDrop').classList.toggle('has-file', !!bkFile);
+  $('#bkDropText').textContent = bkFile ? '✅ '+bkFile.name : 'برای انتخاب تصویر رسید کلیک کنید';
+});
+$('#bookForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const err=$('#bkErr'), msg=$('#bkMsg'), btn=$('#bkBtn'); err.textContent=""; msg.className='book-msg';
+  const name=$('#bkName').value.trim(), contact=$('#bkContact').value.trim(), ad_text=$('#bkText').value.trim();
+  if(!selDay){ err.textContent='یک روز انتخاب کنید.'; return; }
+  if(!name||!contact||!ad_text){ err.textContent='همه فیلدها را پر کنید.'; return; }
+  if(!bkFile){ err.textContent='تصویر رسید را انتخاب کنید.'; return; }
+  btn.disabled=true; btn.classList.add('loading');
+  try{
+    const ext=(bkFile.name.split('.').pop()||'jpg').toLowerCase();
+    const path=`bookings/${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`;
+    const { error: up } = await sb.storage.from('receipts').upload(path, bkFile); if(up) throw up;
+    const { error: ins } = await sb.from('ad_bookings').insert({ day:selDay, name, contact, ad_text, receipt_path:path, status:'pending' });
+    if(ins) throw ins;
+    msg.className='book-msg ok'; msg.textContent='رزرو ثبت شد و پس از تأیید مدیریت نمایش داده می‌شود.';
+    toast('رزرو شما ثبت شد.','success');
+    e.target.reset(); bkFile=null; selDay=null; $('#bkDrop').classList.remove('has-file'); $('#bkDropText').textContent='برای انتخاب تصویر رسید کلیک کنید';
+    loadBooking();
+  }catch(x){
+    const m=String((x&&x.message)||x);
+    if(/limit_reached/.test(m)) err.textContent='سقف ۳ درخواست در روز برای این شناسه پر شده.';
+    else if(/duplicate|unique/i.test(m)) { err.textContent='این روز همین الان رزرو شد؛ روز دیگری انتخاب کنید.'; loadBooking(); }
+    else err.textContent='خطا در ثبت رزرو. دوباره تلاش کنید.';
+    console.error(x);
+  }finally{ btn.disabled=false; btn.classList.remove('loading'); }
+});
+
+/* ============ Retry actions ============ */
+document.addEventListener('click', e=>{
+  const retry=e.target.closest('[data-retry]');
+  if(!retry) return;
+  const type=retry.dataset.retry;
+  if(type==='prices') loadPrices();
+  if(type==='packages') loadPackages();
+});
+
 /* ============ Init ============ */
 (async function init(){
-  await loadSettings();
-  await Promise.all([loadPrices(), loadPackages()]);
-  await loadAds();
+  // هیچ درخواست شبکه‌ای نباید جلوی بقیه بخش‌ها را بگیرد.
+  await Promise.allSettled([
+    loadSettings(),
+    loadPrices(),
+    loadPackages(),
+    loadBooking()
+  ]);
 })();
 </script>
 </body>
